@@ -1,0 +1,108 @@
+﻿<Window x:Class="Kalkulačka.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kalkulačka"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="494">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"  CornerRadius="50" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFF9" Offset="0.033"/>
+                <GradientStop Color="#FF39E431" Offset="1"/>
+                <GradientStop Color="#FFCAF01D" Offset="0.537"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="Multipy" Height="auto" Width="auto" Grid.Column="3" Margin="7" Grid.Row="5" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" VerticalContentAlignment="Center" Click="Multipy_Click">*</Button>
+        <Button x:Name="Del" Height="auto" Width="auto" Grid.Column="1" Margin="7" Grid.Row="5" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Del_Click">Del</Button>
+        <Button x:Name="Enter" Height="auto" Width="auto" Grid.Column="2" Margin="7" Grid.Row="5" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Enter_Click">=</Button>
+        <Button x:Name="One" Height="auto" Width="auto" Grid.Column="0" Margin="7" Grid.Row="4" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="One_Click">1</Button>
+        <Button x:Name="Two" Height="auto" Width="auto" Grid.Column="1" Margin="7" Grid.Row="4" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Two_Click">2</Button>
+        <Button x:Name="Three" Height="auto" Width="auto" Grid.Column="2" Margin="7" Grid.Row="4" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Three_Click">3</Button>
+        <Button x:Name="Plus" Height="auto" Width="auto" Grid.Column="3" Margin="7" Grid.Row="4" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Plus_Click">+</Button>
+        <Button x:Name="Four" Height="auto" Width="auto" Grid.Column="0" Margin="7" Grid.Row="3" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Four_Click">4</Button>
+        <Button x:Name="Five" Height="auto" Width="auto" Grid.Column="1" Margin="7" Grid.Row="3" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Five_Click">5</Button>
+        <Button x:Name="Six" Height="auto" Width="auto" Grid.Column="2" Margin="7" Grid.Row="3" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Six_Click">6</Button>
+        <Button x:Name="Minus" Height="auto" Width="auto" Grid.Column="3" Margin="7" Grid.Row="3" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Minus_Click">-</Button>
+        <Button x:Name="Seven" Height="auto" Width="auto" Grid.Column="0" Margin="7" Grid.Row="2" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Seven_Click">7</Button>
+        <Button x:Name="Eight" Height="auto" Width="auto" Grid.Column="1" Margin="7" Grid.Row="2" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Eight_Click">8</Button>
+        <Button x:Name="Nine" Height="auto" Width="auto" Grid.Column="2" Margin="7" Grid.Row="2" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Nine_Click">9</Button>
+        <Button x:Name="Divide" Height="auto" Width="auto" Grid.Column="3" Margin="7" Grid.Row="2" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Divide_Click">/</Button>
+        <Button x:Name="Zero" Height="auto" Width="auto" Margin="10" Grid.Row="5" Background="BlueViolet" Style="{DynamicResource RoundButtonStyle}" FontSize="48" FontFamily="Source Code Pro Black" Click="Zero_Click">0</Button>
+        <Label x:Name="Zadani" Grid.ColumnSpan="4"  FontSize="48" FontFamily="Source Code Pro Black" Margin="0"/>
+        <Label x:Name="Vysledek" Grid.ColumnSpan="4" Grid.Row="1"  FontSize="48" FontFamily="Source Code Pro Black"></Label>
+
+    </Grid>
+</Window>
